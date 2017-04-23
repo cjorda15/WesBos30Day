@@ -37,8 +37,28 @@
   }
 </style>
 
-<button></button>
+<button>Click Me!</button>
 <script>
+  let one = document.querySelector('.one')
+  let two = document.querySelector('.two')
+  let three = document.querySelector('.three')
+  let button = document.querySelector('button')
+
+  one.addEventListener('click',() => {
+    console.log("one")
+  })
+
+  two.addEventListener('click',() => {
+    console.log("two")
+  })
+
+  three.addEventListener('click',() => {
+    console.log("three")
+  })
+
+  button.addEventListener('click',() => {
+    console.log("button clicked")
+  })
 
 </script>
 </body>
