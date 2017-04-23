@@ -20,19 +20,63 @@
       <li>Loading Tapas...</li>
     </ul>
     <form class="add-items">
-      <input type="text" name="item" placeholder="Item Name" required>
-      <input type="submit" value="+ Add Item">
+      <input class="input-field" type="text" name="item" placeholder="Item Name" required>
+      <input class="input-button" type="submit" value="+ Add Item">
     </form>
   </div>
 
 <script>
+  (function(){
+    createList()
+  })()
+
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
+  const inputValue = document.querySelector('.input-field')
+  const inputButton = document.querySelector('.input-button')
   const items = [];
+
+
+  inputButton.addEventListener('click', () =>{
+    addListItem(inputValue.value)
+  })
+
+
+  function addListItem(newItem){
+    items.push(newItem)
+    let list = JSON.parse(localStorage.getItem('items'))
+      if (!list){
+      list = []
+      }
+    renderList(list)
+    list.push({text:newItem,done:false})
+    localStorage.setItem('items',JSON.stringify(list))
+  }
+
+  function renderList(list){
+     list.map(items=>{
+       itemsList.prepend(`
+         <li>
+         ${items.text} : ${items.done}
+         </li>
+         `)
+     })
+   }
+
+   function createList(){
+     let list = JSON.parse(localStorage.getItem('items'))
+      !list ?
+      list = []: list.forEach(item =>{
+      document.querySelector('.plates').prepend(
+      `  <li>
+        hello
+        </li>)`
+    )})
+   }
+
 
 </script>
 
 
 </body>
 </html>
-

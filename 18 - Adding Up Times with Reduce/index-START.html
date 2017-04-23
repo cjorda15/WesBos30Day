@@ -182,6 +182,25 @@
     </li>
   </ul>
 <script>
+  let list = document.querySelectorAll('li')
+
+  let totes = Object.keys(list).reduce((acc,val) => {
+  let total = list[val].attributes[0].value
+  let split = total.split(":")
+  let timeTotal  = Number(split[1]) + split[0] * 60
+
+  acc+=timeTotal
+
+  // let secs = acc%60
+  // let mins = Math.floor(acc/60)
+  // return mins+":"+secs
+  return acc
+},0)
+  let secs = totes%60
+  let mins = Math.floor(totes/60)
+  let hours = Math.floor(totes/360)
+
+document.querySelector('.videos').prepend(`total time  ${mins}:${secs}`)
 </script>
 </body>
 </html>
