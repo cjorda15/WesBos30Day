@@ -15,10 +15,40 @@
     </ul>
   </form>
 <script>
+
+var xhr = new XMLHttpRequest();
+
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
 
 let formInput = document.querySelector(".search")
-console.log(formInput)
+let list      = document.querySelector('.suggestions')
+
+formInput.addEventListener('keyup',(e)=>{
+   runApi(formInput.value)
+})
+
+  function runApi(value){
+fetch(endpoint).then(resp =>resp.json()).then(data => {
+  createList(data,value)
+  }).catch(e => console.log(e))
+}
+
+function createList(data,value){
+  list.innerHTML=""
+  let compareInput = value.split("")
+  let total = data.filter(obj=>{
+     return obj.state.includes(value) || obj.city.includes(value)
+  })
+
+    total.forEach(location => {
+      list.innerHTML+= `<li>
+    ${location.city}  , ${location.state}
+      </li>`
+  })
+}
+
+
+
 
 
 </script>
